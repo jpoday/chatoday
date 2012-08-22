@@ -1,10 +1,11 @@
 require 'rubygems'
 require 'active_record'
 require 'sqlite3'
+require 'yaml'
+require 'logger'
 
-ActiveRecord::Base.establish_connection(
-  :adapter  => 'sqlite3',
-  :database => 'db/test.sqlite3')
+dbconfig = YAML::load(File.open('db/database.yml'))
+ActiveRecord::Base.establish_connection(dbconfig)
 
 require 'chatoday/user'
 require 'chatoday/room'

@@ -4,6 +4,8 @@ source 'http://gemcutter.org'
 group :development, :test do
   gem 'ruby-debug19', :require => 'ruby-debug'
   gem 'sqlite3'
+  gem 'pry'
+  gem 'database_cleaner'
 end
 
 group :test do
@@ -12,5 +14,7 @@ group :test do
 end
 
 gem 'activerecord'
+gem 'logger'
+
 
 
