@@ -9,7 +9,7 @@ Feature: Comment in the chat room
 		And I'm a user named "Joe"
 		And I'm in the room
 		When I say "Hey!"
-		Then the room should display "Joe comments: "Hey!""
-		And the comment should exist
+		Then the comment should exist
+		And the room should display "Joe comments: "Hey!""
 		
 	

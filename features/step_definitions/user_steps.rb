@@ -1,3 +1,7 @@
 Given /^I'm a user named "(.*?)"$/ do |name|
-  @user1 = ChatODay::User.create(:name => name)
+  @user = FactoryGirl.create(:user, :name => name)
+end
+
+Given /^there's another user named "(.*?)"$/ do |name|
+  FactoryGirl.create(:user, :name => name)
 end

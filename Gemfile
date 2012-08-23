@@ -6,6 +6,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'pry'
   gem 'database_cleaner'
+  gem 'factory_girl', '~> 4.0'
 end
 
 group :test do

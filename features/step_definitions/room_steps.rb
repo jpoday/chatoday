@@ -1,18 +1,22 @@
 Given /^the room exists$/ do
-  @room = ChatODay::Room.create(:name => "NationBuilder Tech Test")
+  @room = FactoryGirl.create(:room)
   @room.start(output)
 end
 
 Given /^I'm in the room$/ do
-  ChatODay::RoomUser.create(:user => @user1, :room => @room)
+  FactoryGirl.create(:room_user, :user => @user, :room => @room)
+end
+
+Given /^he's in the room$/ do
+  FactoryGirl.create(:room_user, :user => @user2, :room => @room)
 end
 
 When /^I enter a room$/ do
-  @room.enter(@user1)
+  @room.enter(@user)
 end
 
 When /^I leave the room$/ do
-  @room.leave(@user1)
+  @room.leave(@user)
 end
 
 Then /^the room should display "(.*?)"$/ do |message|
@@ -20,11 +24,11 @@ Then /^the room should display "(.*?)"$/ do |message|
 end
 
 Then /^I should be in the room$/ do
-  @room_user = ChatODay::RoomUser.find_by_user_id(@user1)
+  @room_user = RoomUser.find_by_user_id(@user)
   @room_user.should be_valid
 end
 
 Then /^I should not be in the room$/ do
-  @room_user = ChatODay::RoomUser.find_by_user_id(@user1)
+  @room_user = RoomUser.find_by_user_id(@user)
   @room_user.should be_nil
 end
