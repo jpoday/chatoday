@@ -4,6 +4,7 @@ module ChatODay
     has_many :users,
       :through => :room_users,
       :source => :user
+    has_many :comments
     
     def start(output)
       @output = output
@@ -18,6 +19,10 @@ module ChatODay
       id = RoomUser.where("room_id = ? AND user_id = ?", self.id, user.id).pluck(:id)
       RoomUser.delete(id)
       @output.puts "#{user.name} leaves"
+    end
+    
+    def display_comment(comment)
+      @output.puts "#{comment.user.name} comments: \"#{comment.content}\""
     end
   end
 end

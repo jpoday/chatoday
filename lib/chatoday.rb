@@ -10,3 +10,4 @@ ActiveRecord::Base.establish_connection(dbconfig)
 require 'chatoday/user'
 require 'chatoday/room'
 require 'chatoday/room_user'
+require 'chatoday/comment'

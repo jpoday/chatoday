@@ -11,7 +11,6 @@ Feature: Enter and exit a chat room
 		Then the room should display "Joe enters the room"
 		And I should be in the room
 	
-	@wip
 	Scenario: leave-the-room
 		Given the room exists
 		And I'm a user named "Joe"

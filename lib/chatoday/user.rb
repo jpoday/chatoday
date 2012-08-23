@@ -4,5 +4,6 @@ module ChatODay
     has_many :rooms,
       :through => :room_users,
       :source => :room
+    has_many :comments
   end
 end
