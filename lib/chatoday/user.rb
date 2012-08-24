@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id   :integer          not null, primary key
+#  name :string(255)      not null
+#
+
 class User < ActiveRecord::Base
   has_many :room_users, :dependent => :destroy
   has_many :rooms,
@@ -17,5 +25,13 @@ class User < ActiveRecord::Base
 
   def interacts(verb,other_user,room)
     Interaction.create(:subject => self, :verb => verb, :receiver => other_user, :room => room)
+  end
+  
+  def entrances
+    History.where("event_type = ? AND event_id = ?","entrance",self.id)
+  end
+  
+  def exits
+    History.where("event_type = ? AND event_id = ?","exit",self.id)
   end
 end

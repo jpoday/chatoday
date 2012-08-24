@@ -11,5 +11,7 @@ Feature: Comment in the chat room
 		When I say "Hey!"
 		Then the comment should exist
 		And the room should display "Joe comments: "Hey!""
+		And it should add the comment to chat history
+		
 		
 	

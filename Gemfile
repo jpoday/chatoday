@@ -7,6 +7,7 @@ group :development, :test do
   gem 'pry'
   gem 'database_cleaner'
   gem 'factory_girl', '~> 4.0'
+  gem 'annotate'
 end
 
 group :test do

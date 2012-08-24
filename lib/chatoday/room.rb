@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: rooms
+#
+#  id   :integer          not null, primary key
+#  name :string(255)      not null
+#
+
 class Room < ActiveRecord::Base
   has_many :room_users, :dependent => :destroy
   has_many :users,
@@ -5,6 +13,7 @@ class Room < ActiveRecord::Base
     :source => :user
   has_many :comments, :dependent => :destroy
   has_many :interactions, :dependent => :destroy
+  has_many :histories, :dependent => :destroy
   
   def start(output)
     @output = output
@@ -12,12 +21,14 @@ class Room < ActiveRecord::Base
   
   def enter(user)
     RoomUser.create(:room => self, :user => user)
+    self.histories.create(:event_type => "entrance", :event_id => user)
     @output.puts "#{user.name} enters the room"
   end
   
   def leave(user)
     id = RoomUser.where("room_id = ? AND user_id = ?", self.id, user.id).pluck(:id)
     RoomUser.delete(id)
+    self.histories.create(:event_type => "exit", :event_id => user)
     @output.puts "#{user.name} leaves"
   end
   

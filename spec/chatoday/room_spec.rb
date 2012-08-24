@@ -79,4 +79,17 @@ describe Room do
       Interaction.find_by_id(@interaction.id).should be_nil
     end
   end
+  
+  describe "history associations" do
+    
+    it "should have a history association" do
+      @room.should respond_to(:histories)
+    end
+    
+    it "should destroy the associated history" do
+      @history = @room.histories.create(:event_type => "entrance", :event_id => @user)
+      @room.destroy
+      History.find_by_id(@history.id).should be_nil
+    end
+  end
 end

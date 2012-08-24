@@ -24,6 +24,18 @@ describe User do
       @user.destroy
       RoomUser.find_by_id(@room_user.id).should be_nil
     end
+    
+    context "entrances" do
+      it "should have an entrance assocation" do
+        @user.should respond_to(:entrances)
+      end
+    end
+    
+    context "exit" do
+      it "should have an exit assocation" do
+        @user.should respond_to(:exits)
+      end
+    end
   end
   
   describe "comment associations" do

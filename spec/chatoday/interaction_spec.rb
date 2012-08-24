@@ -37,5 +37,15 @@ describe Interaction do
     it "should have the right receiver" do
       @interaction.receiver.should == @other_user
     end
+    
+    it "should have a history association" do
+      @interaction.should respond_to(:history)
+    end
+    
+    it "should destroy the associated history" do
+      @history = @interaction.history
+      @interaction.destroy
+      History.find_by_id(@history.id).should be_nil
+    end
   end
 end
