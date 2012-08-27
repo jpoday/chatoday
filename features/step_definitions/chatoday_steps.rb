@@ -11,3 +11,7 @@ end
 def output
   @output ||= Output.new
 end
+
+def hourly_output
+  @output = Output.new
+end

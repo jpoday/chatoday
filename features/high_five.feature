@@ -6,12 +6,12 @@ Feature: High-five another user
 
 	Scenario: high-five-another-user
 		Given the room exists
-		And I'm a user named "Joe"
-		And I'm in the room
-		And there's another user named "Dan"
-		And he's in the room
-		When I high five "Dan"
-		Then the "high-five" action should exist
+		And there is a user named "Joe"
+		And "Joe" is in the room
+		And there is a user named "Dan"
+		And "Dan" is in the room
+		When "Joe" high-fives "Dan"
+		Then "Joe"'s high-five to "Dan" should exist
 		And the room should display "Joe high-fives Dan"
-		And it should add the interaction to chat history
+		And it should add "Joe"'s high-five to "Dan" to chat history
 		

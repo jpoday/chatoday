@@ -28,10 +28,10 @@ class User < ActiveRecord::Base
   end
   
   def entrances
-    History.where("event_type = ? AND event_id = ?","entrance",self.id)
+    History.where("event_type = ? AND event_id = ?","Entrance",self.id)
   end
   
   def exits
-    History.where("event_type = ? AND event_id = ?","exit",self.id)
+    History.where("event_type = ? AND event_id = ?","Exit",self.id)
   end
 end

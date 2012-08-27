@@ -3,32 +3,39 @@ Given /^the room exists$/ do
   @room.start(output)
 end
 
-Given /^I'm in the room$/ do
-  FactoryGirl.create(:room_user, :user => @user, :room => @room)
+Given /^"(.*?)" is in the room$/ do |name|
+  user = User.find_by_name(name)
+  FactoryGirl.create(:room_user, :user => user, :room => @room)
 end
 
-Given /^he's in the room$/ do
-  FactoryGirl.create(:room_user, :user => @user2, :room => @room)
+When /^"(.*?)" enters the room( at "(#{CAPTURE_TIME})")?$/ do |name, time_present, time|
+  @room.enter(User.find_by_name(name))
 end
 
-When /^I enter a room$/ do
-  @room.enter(@user)
+When /^"(.*?)" leaves the room( at "(#{CAPTURE_TIME})")?$/ do |name, time_present, time|
+  user = User.find_by_name(name)
+  @room.leave(user)
 end
 
-When /^I leave the room$/ do
-  @room.leave(@user)
+When /^an "(.*?)" summary is requested$/ do |granularity|
+  @room.start(hourly_output)
+  @room.summary(granularity)
 end
 
+Then /^"(.*?)" should( not)? be in the room$/ do |name, negate|
+  user = User.find_by_name(name)
+  present = RoomUser.find_by_user_id(user)
+  negate ? (present.should be_nil) : (present.should be_valid)
+end
+
+# Individual message
 Then /^the room should display "(.*?)"$/ do |message|
-  output.messages.should include(message)
+  output.messages.grep /#{message}/
 end
 
-Then /^I should be in the room$/ do
-  @room_user = RoomUser.find_by_user_id(@user)
-  @room_user.should be_valid
-end
-
-Then /^I should not be in the room$/ do
-  @room_user = RoomUser.find_by_user_id(@user)
-  @room_user.should be_nil
+# Block message
+Then /^the room should show$/ do |string|
+  string.split("\n").each_with_index do |message,i|
+    output.messages[i].should == "#{message}"
+  end
 end

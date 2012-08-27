@@ -5,18 +5,19 @@ Feature: Enter and exit a chat room
 	So that I can chat and leave when I want
 
 	Scenario: enter-the-room
-		Given I'm a user named "Joe"
-		And the room exists
-		When I enter a room
+	 	Given the room exists
+		And there is a user named "Joe"
+		When "Joe" enters the room
 		Then the room should display "Joe enters the room"
-		And I should be in the room
-		And it should add my "entrance" to chat history
+		And "Joe" should be in the room
+		And it should add "Joe"'s "entrance" to chat history
 	
+
 	Scenario: leave-the-room
 		Given the room exists
-		And I'm a user named "Joe"
-		And I'm in the room
-		When I leave the room
+		And there is a user named "Joe"
+		And "Joe" is in the room
+		When "Joe" leaves the room
 		Then the room should display "Joe leaves"
-		And I should not be in the room
-		And it should add my "exit" to chat history
+		And "Joe" should not be in the room
+		And it should add "Joe"'s "exit" to chat history
