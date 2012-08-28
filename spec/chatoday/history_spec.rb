@@ -8,7 +8,7 @@ describe History do
 
   describe "associations" do
     before(:each) do
-      @history = History.create(:event_type => "entrance", :event_id => @user, :room => @room)
+      @history = History.create(:event_type => "Entrance", :event_id => @user, :room => @room)
     end
     
     it "should have a room association" do

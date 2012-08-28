@@ -2,8 +2,8 @@ require 'spec_helper'
 
 describe Room do
   before(:each) do
-    @user = User.create(:name => "Joe")
-    @room = Room.create(:name => "NationBuilder Tech Test")
+    @user = FactoryGirl.create(:user)
+    @room = FactoryGirl.create(:room)
   end
   
   it "should have an 'enter' method" do
@@ -17,7 +17,7 @@ describe Room do
   describe "user associations" do
     
     before(:each) do
-      @room_user = RoomUser.create(:user => @user, :room => @room)
+      @room_user = FactoryGirl.create(:room_user, :user => @user, :room => @room)
     end
     
     it "should have a user association" do
@@ -38,7 +38,7 @@ describe Room do
     
     before(:each) do
       @room.stub!(:display_comment)
-      @comment = Comment.create(:content => "Hey!", :user => @user, :room => @room)
+      @comment = FactoryGirl.create(:comment, :user => @user, :room => @room)
     end
     
     it "should have a comment association" do

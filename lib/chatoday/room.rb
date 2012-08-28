@@ -47,8 +47,8 @@ class Room < ActiveRecord::Base
       end_time = self.histories.last.created_at
       (start_time.hour..end_time.hour).each_with_index do |hour,i|
         @output.puts "#{(start_time+i.hour).strftime("%l%P").strip}:"
-        entrances = self.histories.where("event_type = ?","Entrance").during_hour(start_time+i.hours).count
         
+        entrances = self.histories.where("event_type = ?","Entrance").during_hour(start_time+i.hours).count
         @output.puts "\t#{entrances} #{"person".pluralize(entrances)} entered" if entrances && entrances != 0
         
         exits = self.histories.where("event_type = ?","Exit").during_hour(start_time+i.hours).count
@@ -65,10 +65,6 @@ class Room < ActiveRecord::Base
         @output.puts "\t#{comments} #{"comment".pluralize(comments)}" if comments
       end
     end
-  end
-  
-  def self.happened_during()
-    where("self.histories.created_at >= ? AND histories.created_at < ?", )
   end
   
   private

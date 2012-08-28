@@ -1,5 +1,5 @@
-Feature: NationBuilder Tech Test
-	
+Feature: Tech Test
+	NationBuilder
 	As Joe O'Day
 	I want to display the code I've created
 	So my interview goes well and I get hired ;)

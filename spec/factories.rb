@@ -4,7 +4,7 @@ FactoryGirl.define do
   end
   
   factory :room do
-    name "NationBuilder Tech Test"
+    name "Tech Test"
   end
   
   factory :room_user do

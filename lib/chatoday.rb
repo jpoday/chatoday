@@ -21,7 +21,7 @@ ActiveRecord::Base.establish_connection(dbconfig)
 # Doesn't really make sense to have a chat room without concurrency or multiple users
 
 # unless ENV['RACK_ENV'] == 'test'
-#   room = Room.create(:name => "NationBuilder Tech Test")
+#   room = Room.create(:name => "Tech Test")
 #   room.start(STDOUT)
 #   print "\n>> "
 #   while input = gets.chomp
